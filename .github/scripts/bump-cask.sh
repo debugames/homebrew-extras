@@ -14,6 +14,9 @@ if [ $ret -ne 0 ]; then
   if grep -q "Duplicate PRs must not be opened." tmp.log; then
     echo "PR for $VERSION already exists. Skipping."
     exit 0
+  elif grep -q "nothing to commit, working tree clean" tmp.log; then
+      echo "No changes. This happens when the PR of this cask has not yet been opened even once."
+    exit 0
   else
     exit $ret
   fi
