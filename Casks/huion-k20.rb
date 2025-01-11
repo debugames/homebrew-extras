@@ -3,7 +3,7 @@ cask "huion-k20" do
   sha256 "e410c2f133edeb37d93fbf68a53262eb468e3a71555ec8af4433842bac471c69"
 
   url "https://driverdl.huion.com/driver/K20_K100/HuionTablet_MacDriver_v#{version}.dmg",
-      verified: "download01.xp-pen.com/"
+      verified: "driverdl.huion.com/"
   name "Huion K20"
   desc "Driver for Huion K20"
   homepage "https://www.huion.com/jp/index.php?m=content&c=index&a=lists&catid=16&myform=1&down_title=k20"
@@ -15,14 +15,16 @@ cask "huion-k20" do
 
   depends_on macos: ">= :sierra"
 
-  #uninstall launchctl: "com.huion.HuionTablet",
-  #          quit:      "com.huion.HuionTablet",
-  #          pkgutil:   "com.huion.HuionTablet"
+  app "HuionTablet.app"
 
-  #zap trash: [
-  #  "~/Library/Saved Application State/com.huion.HuionTablet.savedState/",
-  #]
+  # uninstall launchctl: "com.huion.HuionTablet",
+  #           quit:      "com.huion.HuionTablet",
+  #           pkgutil:   "com.huion.HuionTablet"
 
-  #caveats <<~EOS
-  #EOS
+  # zap trash: [
+  #   "~/Library/Saved Application State/com.huion.HuionTablet.savedState/",
+  # ]
+
+  # caveats <<~EOS
+  # EOS
 end
