@@ -16,14 +16,13 @@ cask "huion-k20" do
 
   app "HuionTablet.app"
 
-  # uninstall launchctl: "com.huion.HuionTablet",
-  #           quit:      "com.huion.HuionTablet",
-  #           pkgutil:   "com.huion.HuionTablet"
+  uninstall launchctl: "com.huion.HuionTablet",
+            quit:      "com.huion.HuionTablet"
 
-  # zap trash: [
-  #   "~/Library/Saved Application State/com.huion.HuionTablet.savedState/",
-  # ]
+  zap trash: "~/Library/Saved Application State/com.huion.HuionTablet.savedState/"
 
-  # caveats <<~EOS
-  # EOS
+  caveats <<~EOS
+    To uninstall, follow this instruction: https://support.huion.com/en/support/solutions/articles/44002222326-how-to-uninstall-version-15-driver-macos-
+    And then, run `brew uninstal --zap -f huion-k20`
+  EOS
 end
