@@ -1,0 +1,40 @@
+name: Update Homebrew Casks
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # every day at midnight
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-casks:
+    runs-on: macos-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 'brew bump-cask-pr' seems to fail to authenticate with GitHub CLI (gh) on GitHub Actions.
+      #  Instead of that, specifying HOMEBREW_GITHUB_API_TOKEN works well.
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Tap this repository
+        run: brew tap debugames/extras
+      - name: Configure git
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # gh auth setup-git
+      - name: Install playwright
+        run: |
+          npm install playwright
+          npx playwright install
+      - name: Bump tourbox-console
+        run: |
+          VERSION=$(node .github/scripts/fetch-url-tourbox-console.js)
+          .github/scripts/bump-cask.sh debugames/extras/tourbox-console $VERSION
+      - name: Bump xppen
+        run: |
+          .github/scripts/bump-cask-by-livecheck.sh debugames/extras/xppen
