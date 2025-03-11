@@ -1,6 +1,6 @@
 cask "tourbox-console" do
-  version "5.7.9"
-  sha256 "f1aa455027c86d2d851153af7ed8b08d6c69cf2cdef48b7a908a7df620c51fea"
+  version "5.8.0"
+  sha256 "159368a5ee829fa8846f2f194ac7b069dbb4259d2463a732312ef93f8c1a5166"
 
   url "https://tourbox-web-files.s3.us-west-2.amazonaws.com/prod/console/TourBoxInstall#{version}.zip",
       verified: "tourbox-web-files.s3.us-west-2.amazonaws.com/"
