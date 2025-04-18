@@ -1,6 +1,6 @@
 cask "xppen" do
-  version "2024,12,4.0.6_241212"
-  sha256 "b447f0f14635eabee1925947117abc089bae7a0abd7ba95640e6d378c62255de"
+  version "2025,04,4.0.8_250414"
+  sha256 "c792fc0c5df8c38b75267d302d0c3ced49371ac7be73998875279bc627dad3ca"
 
   url "https://download01.xp-pen.com/file/#{version.csv.first}/#{version.csv.second}/XPPenMac_#{version.csv.third}.zip",
       verified: "download01.xp-pen.com/"
@@ -14,7 +14,7 @@ cask "xppen" do
       version = page[/class="name_text".*?>XPPenMac_(.*?)</, 1]
       date = page[/class="name_time".*?>(\w{3} \d{2},\d{4})/, 1]
       date = Date.parse(date)
-      "#{date.year},#{date.month.to_s.rjust(2, '0')},#{version}"
+      "#{date.year},#{date.month.to_s.rjust(2, "0")},#{version}"
     end
   end
 
