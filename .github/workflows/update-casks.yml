@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   update-casks:
-    runs-on: macos-latest
+    # runs-on: macos-latest
+    runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # 'brew bump-cask-pr' seems to fail to authenticate with GitHub CLI (gh) on GitHub Actions.
