@@ -20,6 +20,7 @@ jobs:
       HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+      - run: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       - run: brew tap debugames/extras
       - name: Configure git
         run: |
