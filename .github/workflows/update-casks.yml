@@ -34,7 +34,7 @@ jobs:
         run: |
           VERSION=$(node .github/scripts/fetch-url-tourbox-console.js)
           .github/scripts/bump-cask.sh debugames/extras/tourbox-console $VERSION
-      #- name: Bump xppen # TODO: Should be fixed for new URL
-      #  run: .github/scripts/bump-cask-by-livecheck.sh debugames/extras/xppen
+      - name: Bump xppen # TODO: Should be fixed for new URL
+        run: .github/scripts/bump-cask-by-livecheck.sh debugames/extras/xppen
       - name: Bump huion-k20
         run: .github/scripts/bump-cask-by-livecheck.sh debugames/extras/huion-k20
