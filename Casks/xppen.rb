@@ -14,7 +14,7 @@ cask "xppen" do
       version = page[/class="name_text".*?>XPPenMac_(.*?)</, 1]
       date = page[/class="name_time".*?>(\w{3} \d{2},\d{4})/, 1]
       date = Date.parse(date)
-      "#{date.year},#{date.month},#{version}"
+      "#{date.year},#{date.month.to_s.rjust(2, '0')},#{version}"
     end
   end
 
