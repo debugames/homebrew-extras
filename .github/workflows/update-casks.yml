@@ -5,13 +5,13 @@ on:
     - cron: '0 0 * * 1' # every Monday at midnight
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   update-casks:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # Also "Allow GitHub Actions to create and approve pull requests" is required on the repository settings
+      pull-requests: write
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # In GitHub Actions, 'brew bump-cask-pr' requires HOMEBREW_GITHUB_API_TOKEN 

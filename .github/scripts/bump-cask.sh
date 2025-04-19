@@ -20,7 +20,7 @@ function main(){
 function create_merge_bump_pr() {
   CASKNAME=$1
   VERSION=$2
-  brew bump-cask-pr "$CASKNAME" --no-fork --version "$VERSION" > tmp.log 2>&1; ret=$?; cat tmp.log
+  brew bump-cask-pr "$CASKNAME" --no-browse --no-fork --version "$VERSION" > tmp.log 2>&1; ret=$?; cat tmp.log
   # If the command-log includes specific message, return 0. Otherwise, return the error code
   if [ "$ret" -ne 0 ]; then
     if grep -q "Duplicate PRs must not be opened." tmp.log \
