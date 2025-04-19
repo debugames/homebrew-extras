@@ -11,26 +11,22 @@ permissions:
 
 jobs:
   update-casks:
-    # runs-on: macos-latest
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # 'brew bump-cask-pr' seems to fail to authenticate with GitHub CLI (gh) on GitHub Actions.
       #  Instead of gh, specifying HOMEBREW_GITHUB_API_TOKEN works well.
       HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      # - run: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      - run: echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> $GITHUB_PATH
+      # - name: Set Homebrew's PATH
+      #   run:  echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> $GITHUB_PATH
+      - run: |
+         export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+         export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
       - run: brew tap debugames/extras
-      - name: Configure git
-        run: |
-          git config --global user.name  "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Install playwright
-        run: |
-          npm install playwright
-          npx playwright install
+      - uses: ./.github/actions/configure-git
+      - uses: ./.github/actions/install-playwright
       - name: Bump tourbox-console
         run: |
           VERSION=$(node .github/scripts/fetch-url-tourbox-console.js)

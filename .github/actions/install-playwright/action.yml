@@ -1,0 +1,11 @@
+name: 'Install Playwright'
+description: 'Install Playwright and its dependencies'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Playwright
+      shell: bash
+      run: |
+        npm install playwright
+        npx playwright install
