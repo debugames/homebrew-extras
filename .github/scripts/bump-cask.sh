@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
-# Usage: bump-cask.sh <caskname> [version]
+# Usage: bump-cask.sh <package> [version]
 
 BREW_TAP_NAME="debugames/extras"
 
 function main(){
-  PACKAGE="$BREW_TAP_NAME/$1"
+  CASKNAME="$BREW_TAP_NAME/$1"
   VERSION=$2
   if [ -z "$VERSION" ]; then
-    VERSION=$(brew livecheck --json "$PACKAGE" | jq -r '.[0].version.latest')
+    VERSION=$(brew livecheck --json "$CASKNAME" | jq -r '.[0].version.latest')
     if [ -z "$VERSION" ]; then
       echo "Failed to get latest version"
       exit 1
     fi
   fi
-  create_merge_bump_pr "$PACKAGE" "$VERSION"
+  create_merge_bump_pr "$CASKNAME" "$VERSION"
 }
 
 function create_merge_bump_pr() {
-  PACKAGE=$1
+  CASKNAME=$1
   VERSION=$2
-  brew bump-cask-pr "$PACKAGE" --no-fork --version "$VERSION" > tmp.log 2>&1 || ret=$?
+  brew bump-cask-pr "$CASKNAME" --no-fork --version "$VERSION" > tmp.log 2>&1 || ret=$?
   cat tmp.log
   # If the command-log includes specific message, return 0. Otherwise, return the error code
   if [ -n "$ret" ] && [ "$ret" -ne 0 ]; then

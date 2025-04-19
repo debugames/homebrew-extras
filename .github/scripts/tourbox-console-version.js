@@ -1,7 +1,4 @@
-// Usage:
-//     eval $(node tourbox-console.js)
-//     echo $VERSION
-//     echo $URL
+// Usage: node tourbox-console-version.js
 
 const playwright = require('playwright');
 
